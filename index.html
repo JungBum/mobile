@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    
+	<!--meta name="viewport" charset="utf-8" content="width=device-width"--> <!--모바일 브라우저의 기본 뷰포트는 980px 이므로 기기에 맞는 뷰포트로 바꿔 줘야 함-->	
+	<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+        body{background-color:grey;}
+        @media screen and (max-width:1024px)
+        {
+            body{background-color:blue;} 
+        }  
+        @media screen and (max-width:474px) /*376 ~ 474 iphone6+/6s+/7+/8+: 414x736 */
+        {
+            body{background-color:green;} 
+        } 
+        @media screen and (max-width:375px) /*0 ~ 375 iphone6+/6s+/7+/8+: 414x736 */
+        {
+            body{background-color:purple;} 
+        }
+    </style>
+
+    <head>		
+        <script language="javascript">
+            //alert('안녕.');
+        </script>
+    </head>
+
+    <!--이것은 주석-->
+    <body>
+		<table width="100%">
+			<tr>
+				<td style="background-color:white;">
+					<div id="agent">						
+					</div>
+				</td>
+			</tr>
+		</table>
+		<table width="100%">
+			<tr>
+				<td style="background-color:white;">
+					<div id="device">						
+					</div>
+				</td>
+			</tr>
+		</table>		
+		<table width="100%">
+			<tr>
+				<td style="background-color:white;"><div id="mediaTableTd"></div></td>
+			</tr>
+		</table>
+        <table>
+            <tr>
+                <td style="width:100px;background-color:greenyellow;">100px</td>
+                <td style="width:200px;background-color:yellow">200px</td>
+            </tr>			
+        </table>        		
+    </body>
+	<script type='text/javascript'>	
+			
+			//document.getElementById("body").addEventListener("load", showWidth);
+
+			//윈도우 로딩시 사이즈 표시
+			window.onload = function() {
+				//console.log('resize event!');
+				showWidth();
+			};		
+
+			//윈도우 사이즈 변경시 사이즈 표시
+			window.addEventListener('resize', function(){
+				//console.log('resize event!');
+				showWidth();
+				
+			});		
+			
+			function showWidth()
+			{	
+				var w = window.innerWidth;
+				var h = window.innerHeight;
+				var x = document.getElementById("mediaTableTd");
+				x.innerHTML = "width: " + w +" px<br>height: "+h+" px";
+			}
+	</script>	
+	
+	<script type="text/javascript">
+     
+		var uAgent = navigator.userAgent.toLowerCase();
+		document.getElementById("agent").innerHTML=uAgent; //Agent 정보 찍어주기
+	 
+		//< 모바일 기기 추가시 등록
+		var mobilePhones = new Array('iphone', 'ipod', 'android', 'blackberry', 'windows ce', 'nokia', 'webos', 'opera mini', 'sonyericsson', 'opera mobi', 'iemobile', 'windows phone');		 
+		var isMobile = false;	
+		var i=0;
+		for( var i = 0 ; i < mobilePhones.length ; ++i )
+		{
+			if( uAgent.indexOf(mobilePhones[i]) > -1)
+			{
+				isMobile = true;				 
+				break;
+			}
+		}
+		 
+		//< 모바일인 경우
+		if( isMobile )
+		{
+			 document.getElementById("device").innerHTML="모바일기기 맞음(O): "+mobilePhones[i]; //Agent 정보 찍어주기
+		}
+		else
+		{
+			document.getElementById("device").innerHTML="모바일기기가 아님(X)";
+		}
+</script>
+</html>
