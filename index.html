@@ -4,19 +4,57 @@
 	<!--meta name="viewport" charset="utf-8" content="width=device-width"--> <!--모바일 브라우저의 기본 뷰포트는 980px 이므로 기기에 맞는 뷰포트로 바꿔 줘야 함-->	
 	<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
-        body{background-color:grey;}
-        @media screen and (max-width:1024px)
+		
+		.movieBox1,.movieBox2
+		{
+			background-color:white;			
+		}
+		
+		table
+		{
+			/*가운데정렬*/
+			margin-left:auto;  
+			margin-right:auto;			
+		}    
+		
+		img
+		{
+			height:auto;
+		}
+		
+		@media screen and (min-width:1000px) /*1000보다 큰경우*/
         {
             body{background-color:blue;} 
+			table,img{width:1000px;}			
+			/*.movieBox2{display:'';}*/
+			.movieBox1 {width:100px;height:35px;}
+			.movieBox2 {width:100px;height:35px;}
+			
         }  
-        @media screen and (max-width:474px) /*376 ~ 474 iphone6+/6s+/7+/8+: 414x736 */
+        @media screen and (max-width:999px)
         {
             body{background-color:green;} 
+			table,img{width:100%;}
+			/*.movieBox2{display:none;}*/
+			.movieBox1 {width:100px;height:35px;}
+			.movieBox2 {width:100px;height:35px;}
         } 
-        @media screen and (max-width:375px) /*0 ~ 375 iphone6+/6s+/7+/8+: 414x736 */
-        {
-            body{background-color:purple;} 
-        }
+		
+		/*스크롤바 숨기고 기능은 제대로 하게 한다*/
+		/*https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp*/
+		
+		/* Hide scrollbar for Chrome, Safari and Opera */		
+		.hideScroll::-webkit-scrollbar 
+		{
+		  display: none;
+		}
+		/* Hide scrollbar for IE, Edge and Firefox */
+		.hideScroll 
+		{
+		  -ms-overflow-style: none;  /* IE and Edge */
+		  scrollbar-width: none;  /* Firefox */
+		}
+  
     </style>
 
     <head>		
@@ -27,34 +65,50 @@
 
     <!--이것은 주석-->
     <body>
-		<table width="100%">
-			<tr>
-				<td style="background-color:white;">
-					<div id="agent">						
-					</div>
-				</td>
-			</tr>
-		</table>
-		<table width="100%">
-			<tr>
-				<td style="background-color:white;">
-					<div id="device">						
-					</div>
-				</td>
-			</tr>
-		</table>		
-		<table width="100%">
-			<tr>
-				<td style="background-color:white;"><div id="mediaTableTd"></div></td>
-			</tr>
-		</table>
+		<table><tr><td style="background-color:white;"><div id="agent">			</div></td></tr></table> <!--agent information-->
+		<table><tr><td style="background-color:white;"><div id="device">		</div></td></tr></table> <!--device information-->		
+		<table><tr><td style="background-color:white;"><div id="mediaTableTd">	</div></td></tr></table> <!--window width height information-->		
         <table>
             <tr>
-                <td style="width:100px;background-color:greenyellow;">100px</td>
-                <td style="width:200px;background-color:yellow">200px</td>
+                <td id="movei1" style="background-color:yellow">영화1</td>
+                <td id="movie2" style="background-color:greenyellow">영화2</td>
+				<td id="movie3" style="background-color:white">영화3</td>
             </tr>			
-        </table>        		
+        </table>
+		
+		<table><tr><td><img src="bmwi3s.jpg"></td></tr></table>
+		
+		<div class="hideScroll" id='movieList' style="overflow:auto;">		
+			<table style="width:1000px;">
+				<tr>
+					<td class="movieBox1">영화1</td>
+					<td class="movieBox1">영화2</td>
+					<td class="movieBox1">영화3</td>
+					<td class="movieBox1">영화4</td>
+					<td class="movieBox1">영화5</td>
+				
+					<td class="movieBox2">영화6</td>
+					<td class="movieBox2">영화7</td>
+					<td class="movieBox2">영화8</td>
+					<td class="movieBox2">영화9</td>
+					<td class="movieBox2">영화10</td>
+				</tr>			
+			</table>
+		</div>
+		
+		<input type=button name=btnNext value='다음' onclick='javascript:goNext();'>
+		
     </body>
+	<script type='text/javascript'>	
+		function goNext()
+		{
+			//alert('aa');
+			//window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+			var m=document.getElementById("movieList");
+			m.scrollTo({ left: 200, top: 0, behavior: "smooth"});
+		}
+	</script>
+	
 	<script type='text/javascript'>	
 			
 			//document.getElementById("body").addEventListener("load", showWidth);
